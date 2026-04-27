@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wedding Invitation — Jayanthi &amp; Eswar</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --maroon:#7B0F1E;--maroon-deep:#2A0509;--maroon-mid:#4A0B13;
+  --gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#F5E8C0;--gold-shimmer:#FFE599;
+  --ivory:#FDF6E3;--cream:#FAF0DC;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--maroon-deep);
+  font-family:'Cormorant Garamond',serif;
+  color:var(--ivory);
+  overflow-x:hidden;
+}
+
+/* ═══ PARTICLES ═══ */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.particle{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.8),transparent);
+  animation:float-up linear infinite;
+}
+@keyframes float-up{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  10%{opacity:1}
+  90%{opacity:0.4}
+  100%{transform:translateY(-10vh) scale(1.5) rotate(360deg);opacity:0}
+}
+
+/* ═══ FIXED FRAME ═══ */
+.frame{position:fixed;inset:0;pointer-events:none;z-index:999}
+.frame::before,.frame::after{content:'';position:absolute;border:1px solid rgba(201,168,76,0.3)}
+.frame::before{inset:8px}
+.frame::after{inset:14px;border-color:rgba(201,168,76,0.15)}
+.frame-corner{position:absolute;width:24px;height:24px}
+.frame-corner svg{width:100%;height:100%}
+.fc-tl{top:6px;left:6px}
+.fc-tr{top:6px;right:6px;transform:scaleX(-1)}
+.fc-bl{bottom:6px;left:6px;transform:scaleY(-1)}
+.fc-br{bottom:6px;right:6px;transform:scale(-1)}
+
+/* ═══ PAGE ═══ */
+.page{position:relative;z-index:1;min-height:100vh;
+  background:linear-gradient(160deg,#2A0509 0%,#4A0B13 40%,#2A0509 100%)}
+
+/* ═══ HERO ═══ */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:80px 24px 60px;position:relative;overflow:hidden;
+}
+
+/* 3D hero card */
+.hero-card-3d{
+  position:relative;
+  background:linear-gradient(145deg,rgba(80,10,20,0.9),rgba(30,5,10,0.95));
+  border:1px solid rgba(201,168,76,0.35);
+  border-radius:4px;
+  padding:60px 48px;
+  max-width:640px;width:100%;
+  transform-style:preserve-3d;
+  transform:perspective(1000px) rotateX(2deg) rotateY(-1deg);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.8),
+    0 20px 40px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(201,168,76,0.2),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+  transition:transform 0.08s ease;
+}
+.hero-card-3d::before{
+  content:'';position:absolute;inset:-1px;
+  background:linear-gradient(135deg,rgba(201,168,76,0.3),transparent 40%,transparent 60%,rgba(201,168,76,0.15));
+  border-radius:4px;pointer-events:none;z-index:0;
+}
+.hero-card-3d::after{
+  content:'';position:absolute;inset:12px;
+  border:1px solid rgba(201,168,76,0.15);
+  border-radius:2px;pointer-events:none;z-index:0;
+}
+.hero-card-inner{position:relative;z-index:1}
+
+/* Floating kalash */
+.hero-kalash{
+  position:absolute;top:-32px;left:50%;transform:translateX(-50%);
+  width:64px;height:72px;z-index:10;
+  filter:drop-shadow(0 8px 20px rgba(201,168,76,0.5));
+  animation:float-kalash 3s ease-in-out infinite;
+}
+@keyframes float-kalash{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-12px)}
+}
+
+.hero-label{
+  font-size:11px;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);opacity:0.8;margin-bottom:20px;
+  animation:fadeUp 0.8s ease 0.2s both;
+}
+.shimmer-text{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(60px,10vw,96px);
+  line-height:1;
+  background:linear-gradient(90deg,#C9A84C,#FFE599,#C9A84C,#E2C97E,#FFE599,#C9A84C);
+  background-size:300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer-anim 4s linear infinite,fadeUp 0.9s ease 0.4s both;
+  filter:drop-shadow(0 4px 12px rgba(201,168,76,0.3));
+}
+@keyframes shimmer-anim{
+  0%{background-position:200%}
+  100%{background-position:-200%}
+}
+.amp{
+  font-family:'Great Vibes',cursive;font-size:clamp(32px,6vw,56px);
+  color:var(--gold);display:block;margin:2px 0;
+  animation:fadeUp 0.9s ease 0.6s both;
+}
+.hero-date-box{
+  display:inline-block;margin-top:28px;
+  background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.35);
+  padding:14px 40px;
+  position:relative;overflow:hidden;
+  animation:fadeUp 0.8s ease 1s both;
+}
+.hero-date-box::before{
+  content:'';position:absolute;top:-50%;left:-60%;
+  width:40%;height:200%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
+  animation:sweep 3s ease 2s infinite;
+}
+@keyframes sweep{0%{left:-60%}100%{left:120%}}
+
+/* ═══ FLOATING DIYAS ═══ */
+.diya{
+  position:absolute;pointer-events:none;
+  animation:diya-float ease-in-out infinite;
+}
+@keyframes diya-float{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-12px) rotate(3deg)}
+}
+
+/* ═══ SECTIONS ═══ */
+.section{padding:80px 24px;max-width:760px;margin:0 auto}
+.section-title{
+  text-align:center;font-family:'Great Vibes',cursive;
+  font-size:clamp(38px,6vw,58px);color:var(--gold-light);margin-bottom:6px;
+}
+.section-subtitle{
+  text-align:center;font-size:11px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);opacity:0.6;margin-bottom:44px;
+}
+
+/* ═══ COUNTDOWN ═══ */
+.countdown-wrap{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cbox{perspective:600px;cursor:default}
+.cbox-inner{
+  width:110px;height:110px;
+  background:linear-gradient(145deg,rgba(100,15,28,0.9),rgba(40,5,12,0.95));
+  border:1px solid rgba(201,168,76,0.3);
+  border-radius:4px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  transform:perspective(400px) rotateX(8deg);
+  box-shadow:0 12px 32px rgba(0,0,0,0.6),0 4px 8px rgba(0,0,0,0.4),inset 0 1px 0 rgba(201,168,76,0.2);
+  transition:transform 0.3s ease,box-shadow 0.3s ease;
+}
+.cbox:hover .cbox-inner{
+  transform:perspective(400px) rotateX(0deg) scale(1.06);
+  box-shadow:0 24px 48px rgba(0,0,0,0.7),0 8px 16px rgba(201,168,76,0.15),inset 0 1px 0 rgba(201,168,76,0.3);
+}
+.cbox-inner::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:50%;
+  background:rgba(201,168,76,0.04);
+  border-bottom:1px solid rgba(201,168,76,0.1);
+}
+.cbox-inner::after{
+  content:'';position:absolute;top:8px;left:8px;width:6px;height:6px;
+  border-top:1px solid rgba(201,168,76,0.4);border-left:1px solid rgba(201,168,76,0.4);
+}
+.cnum{
+  font-family:'Playfair Display',serif;font-size:40px;line-height:1;
+  color:var(--gold-light);position:relative;z-index:1;
+  text-shadow:0 2px 8px rgba(201,168,76,0.3);
+}
+.clabel{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);opacity:0.55;margin-top:4px;position:relative;z-index:1;
+}
+
+/* ═══ EVENTS ═══ */
+.events-list{display:flex;flex-direction:column;gap:20px}
+.ev-card{
+  background:linear-gradient(135deg,rgba(80,10,20,0.85),rgba(25,4,8,0.9));
+  border:1px solid rgba(201,168,76,0.2);
+  border-left:3px solid var(--gold);
+  padding:28px 32px;
+  display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
+  position:relative;overflow:hidden;
+  transform:perspective(800px) rotateX(2deg);
+  box-shadow:0 8px 24px rgba(0,0,0,0.5),0 2px 6px rgba(0,0,0,0.3);
+  transition:transform 0.35s ease,box-shadow 0.35s ease,border-color 0.35s ease;
+  cursor:default;
+}
+.ev-card:hover{
+  transform:perspective(800px) rotateX(0deg) translateY(-4px);
+  box-shadow:0 20px 48px rgba(0,0,0,0.6),0 6px 16px rgba(201,168,76,0.1);
+  border-color:rgba(201,168,76,0.4);
+}
+.ev-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent 50%);
+  pointer-events:none;
+}
+.ev-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);
+}
+.ev-name{font-family:'Playfair Display',serif;font-size:24px;color:var(--ivory);margin-bottom:4px}
+.ev-date{font-size:15px;color:var(--gold-light);font-style:italic}
+.ev-time{font-size:13px;color:var(--ivory);opacity:0.55;margin-top:3px;letter-spacing:1px}
+.ev-venue{font-size:13px;color:var(--ivory);opacity:0.45;margin-top:2px}
+.ev-tag{
+  background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);
+  color:var(--gold);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  padding:6px 14px;white-space:nowrap;border-radius:2px;
+}
+
+/* ═══ FAMILY ═══ */
+.family-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.fam-card{
+  background:linear-gradient(145deg,rgba(70,10,18,0.8),rgba(20,3,7,0.9));
+  border:1px solid rgba(201,168,76,0.2);
+  padding:32px 24px;text-align:center;
+  transform:perspective(600px) rotateY(4deg);
+  box-shadow:0 16px 40px rgba(0,0,0,0.5);
+  transition:transform 0.35s ease,box-shadow 0.35s ease;
+  border-radius:2px;
+}
+.fam-card:nth-child(2){transform:perspective(600px) rotateY(-4deg)}
+.fam-card:hover,.fam-card:nth-child(2):hover{
+  transform:perspective(600px) rotateY(0) scale(1.02);
+  box-shadow:0 24px 50px rgba(0,0,0,0.6);
+}
+.fam-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:16px}
+.fam-name{font-family:'Playfair Display',serif;font-size:19px;color:var(--ivory);margin-bottom:6px}
+.fam-rel{font-size:13px;color:var(--gold-light);opacity:0.6;font-style:italic}
+
+/* Special invite */
+.si-wrap{margin-top:44px;text-align:center}
+.si-cards{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.si-card{
+  background:linear-gradient(145deg,rgba(90,12,22,0.85),rgba(35,5,12,0.9));
+  border:1px solid rgba(201,168,76,0.25);
+  padding:20px 36px;min-width:140px;
+  transform:perspective(400px) rotateX(5deg);
+  box-shadow:0 12px 30px rgba(0,0,0,0.5),inset 0 1px 0 rgba(201,168,76,0.15);
+  transition:transform 0.3s,box-shadow 0.3s;
+  border-radius:2px;
+}
+.si-card:hover{
+  transform:perspective(400px) rotateX(0) translateY(-4px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.6),0 0 20px rgba(201,168,76,0.08);
+}
+.si-name{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-light)}
+
+/* ═══ VENUE ═══ */
+.venue-3d{
+  background:linear-gradient(145deg,rgba(80,12,22,0.9),rgba(25,4,10,0.95));
+  border:1px solid rgba(201,168,76,0.3);
+  padding:48px 40px;text-align:center;
+  transform:perspective(1000px) rotateX(3deg) rotateY(-1deg);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.7),
+    0 10px 24px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(201,168,76,0.2);
+  position:relative;overflow:hidden;border-radius:2px;
+  transition:transform 0.4s ease,box-shadow 0.4s ease;
+}
+.venue-3d:hover{
+  transform:perspective(1000px) rotateX(0) rotateY(0) translateY(-6px);
+  box-shadow:0 48px 80px rgba(0,0,0,0.8),0 16px 32px rgba(201,168,76,0.08);
+}
+.venue-3d::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.08),transparent 60%);
+  pointer-events:none;
+}
+.venue-3d::after{
+  content:'';position:absolute;top:12px;left:12px;right:12px;bottom:12px;
+  border:1px solid rgba(201,168,76,0.1);pointer-events:none;
+}
+.venue-top{position:absolute;top:14px;left:20px;color:var(--gold);font-size:18px;opacity:0.5}
+.venue-bot{position:absolute;bottom:14px;right:20px;color:var(--gold);font-size:18px;opacity:0.5}
+.venue-name{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold-light);margin-bottom:12px;position:relative;z-index:1}
+.venue-addr{font-size:16px;color:var(--ivory);opacity:0.7;line-height:1.9;font-style:italic;position:relative;z-index:1}
+.map-btn{
+  display:inline-block;margin-top:24px;padding:12px 36px;
+  border:1px solid var(--gold);color:var(--gold);
+  font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;transition:all 0.3s;background:transparent;
+  position:relative;z-index:1;border-radius:2px;overflow:hidden;
+}
+.map-btn::before{
+  content:'';position:absolute;inset:0;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease;z-index:-1;
+}
+.map-btn:hover{color:var(--maroon-deep)}
+.map-btn:hover::before{transform:scaleX(1)}
+
+/* ═══ RSVP ═══ */
+.rsvp-form{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.rsvp-input{
+  background:rgba(253,246,227,0.05);border:1px solid rgba(201,168,76,0.25);
+  color:var(--ivory);font-family:'Cormorant Garamond',serif;font-size:17px;
+  padding:14px 20px;width:100%;outline:none;
+  transition:border-color 0.3s,box-shadow 0.3s;border-radius:2px;
+}
+.rsvp-input::placeholder{color:rgba(245,232,192,0.3)}
+.rsvp-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,168,76,0.1)}
+.rsvp-select{
+  background:rgba(74,11,19,0.95);border:1px solid rgba(201,168,76,0.25);
+  color:var(--ivory);font-family:'Cormorant Garamond',serif;font-size:17px;
+  padding:14px 20px;width:100%;outline:none;cursor:pointer;
+  appearance:none;-webkit-appearance:none;border-radius:2px;
+}
+.rsvp-submit{
+  background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));
+  background-size:200%;color:var(--maroon-deep);border:none;
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;
+  letter-spacing:4px;text-transform:uppercase;padding:16px;cursor:pointer;
+  transition:all 0.3s;width:100%;border-radius:2px;
+  box-shadow:0 4px 16px rgba(201,168,76,0.3);
+}
+.rsvp-submit:hover{
+  background-position:right;transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(201,168,76,0.4);
+}
+.rsvp-success{text-align:center;padding:36px}
+.rsvp-success-title{font-family:'Great Vibes',cursive;font-size:46px;color:var(--gold-light)}
+.rsvp-success-sub{font-size:18px;color:var(--gold);font-style:italic;margin-top:14px;opacity:0.8}
+
+/* ═══ ORNAMENTS ═══ */
+.ornament{display:flex;align-items:center;gap:10px;justify-content:center;margin:0 auto 28px}
+.orn-line{height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn-line-r{height:1px;width:70px;background:linear-gradient(90deg,var(--gold),transparent)}
+.orn-diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.orn-dot{width:4px;height:4px;background:var(--gold-light);border-radius:50%}
+
+.divider{display:flex;align-items:center;gap:14px;max-width:760px;margin:0 auto;padding:0 24px;opacity:0.25}
+.divider .dl{flex:1;height:1px;background:var(--gold)}
+.divider .ds{font-size:18px;color:var(--gold)}
+
+/* ═══ FOOTER ═══ */
+.footer{text-align:center;padding:60px 24px 80px;border-top:1px solid rgba(201,168,76,0.12)}
+.footer-names{
+  font-family:'Great Vibes',cursive;font-size:52px;
+  background:linear-gradient(135deg,#C9A84C,#FFE599,#C9A84C);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;opacity:0.5;
+}
+.footer-dt{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:0.4;margin-top:8px}
+
+/* ═══ SCROLL HINT ═══ */
+.scroll-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.4;
+  animation:fadeIn 2s ease 2.5s both;
+}
+.scroll-arrow{width:1px;height:32px;background:linear-gradient(to bottom,var(--gold),transparent)}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:560px){
+  .family-wrap{grid-template-columns:1fr}
+  .ev-card{grid-template-columns:1fr}
+  .countdown-wrap{gap:10px}
+  .cbox-inner{width:80px;height:80px}
+  .cnum{font-size:30px}
+  .hero-card-3d{padding:40px 24px}
+  .venue-3d{padding:36px 20px}
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<!-- Fixed ornate corner frame -->
+<div class="frame">
+  <div class="frame-corner fc-tl">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M2 22 L2 2 L22 2" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
+      <path d="M2 12 L12 2" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+    </svg>
+  </div>
+  <div class="frame-corner fc-tr">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M2 22 L2 2 L22 2" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
+      <path d="M2 12 L12 2" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+    </svg>
+  </div>
+  <div class="frame-corner fc-bl">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M2 22 L2 2 L22 2" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
+      <path d="M2 12 L12 2" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+    </svg>
+  </div>
+  <div class="frame-corner fc-br">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M2 22 L2 2 L22 2" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
+      <path d="M2 12 L12 2" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+    </svg>
+  </div>
+</div>
+
+<div id="root"></div>
+
+<script type="text/babel">
+const {useState, useEffect, useRef} = React;
+const WEDDING_DATE = new Date('2026-05-10T10:00:00');
+
+/* ── Inject particles ── */
+(function(){
+  const wrap = document.getElementById('particles');
+  for(let i = 0; i < 30; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*12}s;opacity:0`;
+    wrap.appendChild(p);
+  }
+})();
+
+/* ── Mandala SVG ── */
+function Mandala({size = 300, style}){
+  const r = size / 2, petals = 16;
+  return (
+    <svg viewBox={`0 0 ${size} ${size}`} style={style} fill="none" stroke="currentColor">
+      {Array.from({length: petals}, (_, i) => (
+        <g key={i} transform={`rotate(${i * 360 / petals} ${r} ${r})`}>
+          <ellipse cx={r} cy={r * 0.28} rx={r * 0.1} ry={r * 0.28} strokeWidth="0.6"/>
+        </g>
+      ))}
+      {[0.12, 0.22, 0.35, 0.48].map((f, i) => (
+        <circle key={i} cx={r} cy={r} r={r * f} strokeWidth="0.5"/>
+      ))}
+      <circle cx={r} cy={r} r={5} fill="currentColor"/>
+      {Array.from({length: 8}, (_, i) => {
+        const a = (i * 45) * Math.PI / 180;
+        return <line key={i} x1={r} y1={r} x2={r + r * 0.45 * Math.cos(a)} y2={r + r * 0.45 * Math.sin(a)} strokeWidth="0.3"/>;
+      })}
+    </svg>
+  );
+}
+
+/* ── Kalash SVG ── */
+function Kalash(){
+  return (
+    <svg width="64" height="72" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="30" cy="18" rx="14" ry="5" fill="#C9A84C" opacity="0.9"/>
+      <rect x="26" y="4" width="8" height="16" rx="2" fill="#E2C97E"/>
+      <path d="M16 22 Q10 36 14 48 Q20 60 30 62 Q40 60 46 48 Q50 36 44 22 Z" fill="url(#kalashGrad)"/>
+      <ellipse cx="30" cy="62" rx="14" ry="4" fill="#8B6B20" opacity="0.7"/>
+      <path d="M20 30 Q30 26 40 30" stroke="#FFE599" strokeWidth="1" fill="none" opacity="0.6"/>
+      <path d="M17 38 Q30 33 43 38" stroke="#FFE599" strokeWidth="0.8" fill="none" opacity="0.4"/>
+      <defs>
+        <linearGradient id="kalashGrad" x1="16" y1="22" x2="46" y2="62" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#E2C97E"/>
+          <stop offset="0.5" stopColor="#C9A84C"/>
+          <stop offset="1" stopColor="#8B6B20"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+/* ── Ornament divider ── */
+function Ornament(){
+  return (
+    <div className="ornament">
+      <div className="orn-line"/>
+      <div className="orn-diamond"/>
+      <div className="orn-dot"/>
+      <div className="orn-diamond"/>
+      <div className="orn-line-r"/>
+    </div>
+  );
+}
+
+/* ── Section divider ── */
+function Divider(){
+  return (
+    <div className="divider">
+      <div className="dl"/>
+      <div className="ds">✦</div>
+      <div className="dl"/>
+    </div>
+  );
+}
+
+/* ── Countdown hook ── */
+function useCountdown(){
+  const [t, setT] = useState({days:0, hours:0, minutes:0, seconds:0});
+  useEffect(() => {
+    const tick = () => {
+      const diff = WEDDING_DATE - new Date();
+      if(diff <= 0){ setT({days:0, hours:0, minutes:0, seconds:0}); return; }
+      setT({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return t;
+}
+
+/* ── Countdown box ── */
+function CountdownBox({value, label}){
+  return (
+    <div className="cbox">
+      <div className="cbox-inner">
+        <span className="cnum">{String(value).padStart(2,'0')}</span>
+        <span className="clabel">{label}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ── 3D mouse tilt ── */
+function useTilt(ref){
+  useEffect(() => {
+    const el = ref.current;
+    if(!el) return;
+    const onMove = e => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const dx = (e.clientX - cx) / r.width * 14;
+      const dy = (e.clientY - cy) / r.height * 10;
+      el.style.transform = `perspective(1000px) rotateX(${-dy}deg) rotateY(${dx}deg)`;
+    };
+    const onLeave = () => { el.style.transform = 'perspective(1000px) rotateX(2deg) rotateY(-1deg)'; };
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    return () => {
+      el.removeEventListener('mousemove', onMove);
+      el.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
+}
+
+/* ── Events data ── */
+const events = [
+  {name:'Mehendi Ceremony',  date:'Friday, 8th May 2026',   time:'4:00 PM – 10:00 PM', venue:"Kallur's Residence",              tag:'Mehendi'},
+  {name:'Sangeet Night',     date:'Saturday, 9th May 2026', time:'7:00 PM – 11:00 PM', venue:'Kallur Green Valley Banquet Hall', tag:'Sangeet'},
+  {name:'Wedding Ceremony',  date:'Sunday, 10th May 2026',  time:'10:00 AM – 2:00 PM', venue:'Sri Ramulu Temple, Kallur',        tag:'Wedding'},
+  {name:'Wedding Reception', date:'Monday, 11th May 2026',  time:'7:00 PM – 11:00 PM', venue:'Kallur',                          tag:'Reception'},
+];
+
+/* ── RSVP Form ── */
+function RSVPForm(){
+  const [form, setForm] = useState({name:'', phone:'', attending:'Joyfully Accepts', guests:'1 Guest'});
+  const [done, setDone] = useState(false);
+  const h = (k, v) => setForm(f => ({...f, [k]: v}));
+  const submit = e => { e.preventDefault(); setDone(true); };
+
+  if(done) return (
+    <div className="rsvp-success">
+      <div className="rsvp-success-title">We can't wait to celebrate!</div>
+      <div className="rsvp-success-sub">Your RSVP has been received ✦</div>
+    </div>
+  );
+
+  return (
+    <form className="rsvp-form" onSubmit={submit}>
+      <input className="rsvp-input" placeholder="Your Full Name" required value={form.name} onChange={e => h('name', e.target.value)}/>
+      <input className="rsvp-input" placeholder="Phone Number" required value={form.phone} onChange={e => h('phone', e.target.value)}/>
+      <div style={{position:'relative'}}>
+        <select className="rsvp-select" value={form.attending} onChange={e => h('attending', e.target.value)}>
+          <option>Joyfully Accepts</option>
+          <option>Regretfully Declines</option>
+        </select>
+        <span style={{position:'absolute',right:18,top:'50%',transform:'translateY(-50%)',color:'#C9A84C',pointerEvents:'none'}}>▾</span>
+      </div>
+      <div style={{position:'relative'}}>
+        <select className="rsvp-select" value={form.guests} onChange={e => h('guests', e.target.value)}>
+          {[1,2,3,4,5,6].map(n => <option key={n}>{n} Guest{n > 1 ? 's' : ''}</option>)}
+        </select>
+        <span style={{position:'absolute',right:18,top:'50%',transform:'translateY(-50%)',color:'#C9A84C',pointerEvents:'none'}}>▾</span>
+      </div>
+      <button type="submit" className="rsvp-submit">Confirm Attendance</button>
+    </form>
+  );
+}
+
+/* ── Hero section ── */
+function Hero(){
+  const cardRef = useRef();
+  useTilt(cardRef);
+  const t = useCountdown();
+
+  return (
+    <div className="hero">
+      {/* Background mandala */}
+      <Mandala size={600} style={{
+        position:'absolute', top:'50%', left:'50%',
+        transform:'translate(-50%,-50%)',
+        opacity:0.035, color:'#C9A84C', pointerEvents:'none', minWidth:600
+      }}/>
+
+      {/* Floating diyas */}
+      {[
+        {top:'15%', left:'8%',  dur:'3.5s', delay:'0s',   size:32},
+        {top:'20%', right:'8%', dur:'4s',   delay:'1.2s', size:28},
+        {bottom:'18%', left:'12%', dur:'3s', delay:'0.6s', size:24},
+        {bottom:'22%', right:'10%', dur:'4.5s', delay:'2s', size:24},
+      ].map((d, i) => (
+        <div key={i} className="diya" style={{
+          top:d.top, left:d.left, right:d.right, bottom:d.bottom,
+          animationDuration:d.dur, animationDelay:d.delay
+        }}>
+          <svg width={d.size} height={d.size} viewBox="0 0 32 32">
+            <ellipse cx="16" cy="22" rx="10" ry="5" fill="#C9A84C" opacity="0.7"/>
+            <ellipse cx="16" cy="20" rx="7"  ry="3" fill="#E2C97E" opacity="0.4"/>
+            <line x1="16" y1="8" x2="16" y2="18" stroke="#FFE599" strokeWidth="1"/>
+            <ellipse cx="16" cy="8" rx="2" ry="4" fill="#FF6B1A" opacity="0.8"/>
+            <ellipse cx="16" cy="7" rx="1" ry="2" fill="#FFE08A" opacity="0.9"/>
+          </svg>
+        </div>
+      ))}
+
+      {/* 3D tilt hero card */}
+      <div className="hero-card-3d" ref={cardRef}>
+        <div className="hero-kalash"><Kalash/></div>
+        <div className="hero-card-inner">
+          <p className="hero-label">✦ With the Blessings of God &amp; Our Families ✦</p>
+          <Ornament/>
+          <p style={{
+            fontStyle:'italic', fontSize:'16px', color:'var(--gold-light)',
+            marginBottom:'24px', letterSpacing:'2px', opacity:0.8,
+            animation:'fadeUp 0.8s ease 0.3s both'
+          }}>
+            Together with joyful hearts, we invite you to witness the union of
+          </p>
+          <h1>
+            <span className="shimmer-text">Jayanthi</span>
+            <span className="amp">&amp;</span>
+            <span className="shimmer-text">Eswar</span>
+          </h1>
+          <p style={{
+            fontSize:'13px', letterSpacing:'5px', textTransform:'uppercase',
+            color:'var(--gold-pale)', opacity:0.65, margin:'24px 0 6px',
+            animation:'fadeUp 0.8s ease 0.8s both'
+          }}>cordially invite you to their</p>
+          <p style={{
+            fontStyle:'italic', fontSize:'22px', color:'var(--ivory)', opacity:0.9,
+            animation:'fadeUp 0.8s ease 0.95s both'
+          }}>Wedding Celebration</p>
+
+          <div className="hero-date-box">
+            <p style={{fontSize:'11px', letterSpacing:'4px', textTransform:'uppercase', color:'var(--gold)', marginBottom:'4px'}}>Sunday</p>
+            <p style={{fontSize:'26px', color:'var(--ivory)', letterSpacing:'1px'}}>10th May 2026</p>
+          </div>
+
+          {/* Mini countdown */}
+          <div style={{
+            display:'flex', gap:'16px', justifyContent:'center', marginTop:'28px',
+            animation:'fadeUp 0.8s ease 1.3s both'
+          }}>
+            {[{v:t.days,l:'Days'},{v:t.hours,l:'Hrs'},{v:t.minutes,l:'Min'},{v:t.seconds,l:'Sec'}].map(({v,l}) => (
+              <div key={l} style={{textAlign:'center', minWidth:'44px'}}>
+                <div style={{
+                  fontFamily:"'Playfair Display',serif", fontSize:'28px',
+                  color:'var(--gold-light)', lineHeight:1,
+                  textShadow:'0 2px 8px rgba(201,168,76,0.3)'
+                }}>{String(v).padStart(2,'0')}</div>
+                <div style={{
+                  fontSize:'10px', letterSpacing:'2px', textTransform:'uppercase',
+                  color:'var(--gold)', opacity:0.55, marginTop:'3px'
+                }}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="scroll-hint">
+        <span style={{fontSize:'10px', letterSpacing:'3px', textTransform:'uppercase'}}>scroll</span>
+        <div className="scroll-arrow"/>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main App ── */
+function App(){
+  const t = useCountdown();
+  return (
+    <div className="page">
+      <Mandala size={400} style={{position:'absolute',top:-100,right:-100,opacity:0.035,color:'#C9A84C',pointerEvents:'none'}}/>
+      <Mandala size={340} style={{position:'absolute',bottom:'-5%',left:-110,opacity:0.035,color:'#C9A84C',pointerEvents:'none'}}/>
+
+      <Hero/>
+      <Divider/>
+
+      {/* ── Countdown ── */}
+      <div className="section">
+        <h2 className="section-title">Counting Down</h2>
+        <p className="section-subtitle">Until we say "I Do"</p>
+        <div className="countdown-wrap">
+          <CountdownBox value={t.days}    label="Days"/>
+          <CountdownBox value={t.hours}   label="Hours"/>
+          <CountdownBox value={t.minutes} label="Minutes"/>
+          <CountdownBox value={t.seconds} label="Seconds"/>
+        </div>
+      </div>
+
+      <Divider/>
+
+      {/* ── Events ── */}
+      <div className="section">
+        <h2 className="section-title">Celebrations</h2>
+        <p className="section-subtitle">Join us for every cherished moment</p>
+        <div className="events-list">
+          {events.map((ev, i) => (
+            <div key={i} className="ev-card">
+              <div>
+                <p className="ev-name">{ev.name}</p>
+                <p className="ev-date">{ev.date}</p>
+                <p className="ev-time">{ev.time}</p>
+                <p className="ev-venue">✦ {ev.venue}</p>
+              </div>
+              <div className="ev-tag">{ev.tag}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Divider/>
+
+      {/* ── Family ── */}
+      <div className="section">
+        <h2 className="section-title">Our Families</h2>
+        <p className="section-subtitle">With love from both sides</p>
+        <div className="family-wrap">
+          <div className="fam-card">
+            <p className="fam-label">Bride's Family</p>
+            <p className="fam-name">Koti Venkataramana &amp; Akkamma</p>
+            <p className="fam-rel">Parents of the Bride</p>
+          </div>
+          <div className="fam-card">
+            <p className="fam-label">Groom's Family</p>
+            <p className="fam-name">Srinu</p>
+            <p className="fam-rel">Parents of the Groom</p>
+          </div>
+        </div>
+
+        {/* Special Invitation */}
+        <div className="si-wrap">
+          <Ornament/>
+          <p style={{
+            fontSize:'11px', letterSpacing:'5px', textTransform:'uppercase',
+            color:'var(--gold)', opacity:0.6, marginBottom:'6px'
+          }}>Special Invitation By</p>
+          <div className="si-cards">
+            <div className="si-card"><p className="si-name">Pradhu</p></div>
+            <div className="si-card"><p className="si-name">Abhay Ram</p></div>
+          </div>
+        </div>
+      </div>
+
+      <Divider/>
+
+      {/* ── Venue ── */}
+      <div className="section">
+        <h2 className="section-title">The Venue</h2>
+        <p className="section-subtitle">Wedding &amp; reception location</p>
+        <div className="venue-3d">
+          <span className="venue-top">✦</span>
+          <span className="venue-bot">✦</span>
+          <div style={{
+            position:'absolute', top:'50%', left:'50%',
+            transform:'translate(-50%,-50%)',
+            width:'220px', height:'220px', borderRadius:'50%',
+            border:'1px solid rgba(201,168,76,0.06)', pointerEvents:'none'
+          }}/>
+          <p className="venue-name">Eswar Palace</p>
+          <p className="venue-addr">
+            Eswar Palace, Kotta Kalluru<br/>
+            Andhra Pradesh, India
+          </p>
+          <a
+            className="map-btn"
+            href="https://www.google.com/maps?q=Kotta+Kalluru+Andhra+Pradesh"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open in Maps</a>
+        </div>
+      </div>
+
+      <Divider/>
+
+      {/* ── RSVP ── */}
+      <div className="section">
+        <h2 className="section-title">RSVP</h2>
+        <p className="section-subtitle">Kindly respond by 3rd May 2026</p>
+        <RSVPForm/>
+      </div>
+
+      {/* ── Footer ── */}
+      <div className="footer">
+        <div className="footer-names">Jayanthi &amp; Eswar</div>
+        <p className="footer-dt">10th May 2026 · Kotta Kalluru · Andhra Pradesh</p>
+        <div style={{marginTop:24, opacity:0.25}}><Ornament/></div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
